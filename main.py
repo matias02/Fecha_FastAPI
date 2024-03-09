@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from pydantic import BaseModel
 from datetime import datetime
 
@@ -8,14 +8,24 @@ app = FastAPI()
 call_counter = 0
 
 class Item(BaseModel):
-    boolean_param: bool
+    boolean_param: bool = True  # Valor por defecto True para solicitudes GET
 
 @app.post("/date/")
-async def get_date(item: Item):
+async def post_date(item: Item):
     global call_counter
     call_counter += 1
+    return format_date(item.boolean_param)
+
+@app.get("/date/")
+async def get_date():
+    global call_counter
+    call_counter += 1
+    # Devuelve la fecha con el formato por defecto cuando se accede via GET
+    return format_date(True)
+
+def format_date(boolean_param: bool):
     current_datetime = datetime.now()
-    if item.boolean_param:
+    if boolean_param:
         return {"date": current_datetime.strftime("%Y-%m-%d %H:%M:%S")}
     else:
         return {"date": current_datetime.strftime("%Y-%d-%m")}
