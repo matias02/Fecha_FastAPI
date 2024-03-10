@@ -27,3 +27,27 @@ uvicorn main:app --reload
 
 El servidor estará disponible en http://127.0.0.1:8000. Puedes acceder a http://127.0.0.1:8000/docs para ver la documentación interactiva generada por FastAPI y probar los endpoints directamente desde el navegador.
 
+## Prueba caso true y false
+Usando la interfaz de usuario de FastAPI:
+1. Navega a http://127.0.0.1:8000/docs en tu navegador.
+2. Encontrarás el endpoint POST /date/ listado allí. Haz clic en él.
+3. Haz clic en el botón "Try it out".
+4. Verás un campo para editar el cuerpo de la solicitud. Para probar el caso True, introduce:
+
+```json
+{
+  "boolean_param": true
+}
+```
+
+Para probar el caso False, utiliza:
+
+```json
+{
+  "boolean_param": false
+}
+```
+
+5. Haz clic en el botón "Execute" para enviar la solicitud.
+6. La respuesta se mostrará en la interfaz.
+
